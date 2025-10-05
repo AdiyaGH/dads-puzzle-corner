@@ -20,7 +20,6 @@ h1{font-size:22px;margin:0 0 4px}.sub{font-size:14px;opacity:.8}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap}
 button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-radius:8px;font-weight:600}
 .tiny{background:#f0efe9;color:#222;font-weight:600;padding:6px 8px;border:1px solid #ddd}
-.poem{background:#fff;border-radius:10px;padding:12px;display:none}
 .footer{text-align:center;font-size:12px;opacity:.7;padding-top:6px}
 @media (max-width:480px){.grid{grid-template-columns:repeat(15,26px);grid-auto-rows:26px}.cell{width:26px;height:26px}.num{font-size:9px}}
 </style>
@@ -36,7 +35,6 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
     <button id="checkBtn">Check</button>
     <button id="revealBtn">Reveal One</button>
     <button id="clearBtn">Clear</button>
-    <button id="poemBtn">Show Poem</button>
     <span class="tiny">Tip: tap a clue to highlight its word.</span>
   </div>
 
@@ -45,19 +43,6 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
     <div class="clues">
       <div class="clue-list"><h3>Across</h3><div id="across"></div></div>
       <div class="clue-list"><h3>Down</h3><div id="down"></div></div>
-      <div class="poem" id="poemBox">
-        <h3 style="margin:0 0 6px;">A Small Birthday Poem</h3>
-        <p style="margin:0;font-size:14px;line-height:1.5">
-          Pages turned, we learned from you—<br>
-          to love, to think, to see things through.<br>
-          God and family, faith held fast;<br>
-          your steady care has always last.<br><br>
-          Eric, Kailea, Adiya—home;<br>
-          with Zeke on watch, we’re not alone.<br>
-          Fanon’s fire, decolonized mind—<br>
-          your gift: a clearer world to find.
-        </p>
-      </div>
     </div>
   </div>
   <div class="footer">© 2025 • With love, Adiya</div>
@@ -67,35 +52,34 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
 /* --- grid + words --- */
 const SIZE=15,blocks='#',grid=Array.from({length:SIZE},()=>Array.from({length:SIZE},()=>blocks));
 function placeWord(r,c,w,d){for(let i=0;i<w.length;i++){const rr=d==='A'?r:r+i,cc=d==='A'?c+i:c;grid[rr][cc]=w[i];}}
-/* Layout uses only your intended entries */
-placeWord(7,2,'COLONIALISM','A');  // across
-placeWord(7,4,'LOVE','D');         // down
-placeWord(7,7,'FAITH','D');        // down
-placeWord(8,6,'FAMILY','A');       // across
-placeWord(8,3,'GOD','A');          // across
-placeWord(4,2,'ERIC','D');         // down
-placeWord(4,1,'ZEKE','A');         // across
-placeWord(3,6,'FANON','D');        // down
-placeWord(9,6,'WIFE','A');         // across
-placeWord(5,9,'KAILEA','A');       // across
-placeWord(11,9,'ADIYA','A');       // across
+placeWord(7,2,'COLONIALISM','A');
+placeWord(7,4,'LOVE','D');
+placeWord(7,7,'FAITH','D');
+placeWord(8,6,'FAMILY','A');
+placeWord(8,3,'GOD','A');
+placeWord(4,2,'ERIC','D');
+placeWord(4,1,'ZEKE','A');
+placeWord(3,6,'FANON','D');
+placeWord(9,6,'WIFE','A');
+placeWord(5,9,'KAILEA','A');
+placeWord(11,9,'ADIYA','A');
 
-/* --- specific, concrete clues --- */
+/* --- direct, specific clues --- */
 const customClue={
   GOD:"Genesis 1:1 subject (3).",
   FAMILY:"Unit that comes before work in your house (6).",
   LOVE:"1 Corinthians 13 says this 'never fails' (4).",
-  FAITH:"Hebrews 11:1 calls it 'assurance of things hoped for' (5).",
-  ERIC:"First-born son’s name (4).",
-  ADIYA:"Last-born daughter who built this puzzle (5).",
-  KAILEA:"First-born daughter’s name (6).",
+  FAITH:"Hebrews 11:1 'assurance of things hoped for' (5).",
+  ERIC:"First-born son (4).",
+  ADIYA:"Youngest daughter who made this puzzle (5).",
+  KAILEA:"First-born daughter (6).",
   WIFE:"Mom’s title in marriage (4).",
   ZEKE:"Our dog’s name (4).",
   FANON:"Frantz, author of 'Black Skin, White Masks' (5).",
-  COLONIALISM:"System critiqued by Fanon; 'imprisonment of the mind' (11)."
+  COLONIALISM:"System critiqued by Fanon (11)."
 };
 
-/* --- numbering + filtering to only intended words --- */
+/* --- numbering & filtering --- */
 function findStarts(){const s={across:[],down:[]};let n=1;
 for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
   if(grid[r][c]===blocks)continue;
@@ -180,7 +164,7 @@ function checkAll(){
     if(!val)continue;
     if(val===good){cellDiv.classList.add('correct');correct++;} else {cellDiv.classList.add('wrong');}
   }
-  if(correct===total){alert('Perfect! You solved it!');document.getElementById('poemBox').style.display='block';}
+  if(correct===total){alert('Perfect! You solved it!');}
 }
 function revealOne(){
   for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
@@ -196,7 +180,6 @@ function clearAll(){
 document.getElementById('checkBtn').addEventListener('click',checkAll);
 document.getElementById('revealBtn').addEventListener('click',revealOne);
 document.getElementById('clearBtn').addEventListener('click',clearAll);
-document.getElementById('poemBtn').addEventListener('click',()=>{const b=document.getElementById('poemBox');b.style.display=b.style.display==='block'?'none':'block';});
 const s=(starts.across[0]||starts.down[0]);if(s)highlightEntry(s.r,s.c,s.dir);
 </script>
 </body>
