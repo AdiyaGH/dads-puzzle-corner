@@ -1,33 +1,37 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Happy Birthday, Dad — Mini Crossword</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday, Dad — Crossword from Adiya</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f7f6f3;color:#222}
-  header{text-align:center;padding:18px 14px 10px}
-  h1{font-size:22px;margin:0 0 4px}.sub{font-size:14px;opacity:.8}
-  .wrap{display:flex;flex-direction:column;gap:14px;padding:10px 14px 24px;max-width:900px;margin:0 auto}
-  .game{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
-  .grid{display:grid;grid-template-columns:repeat(15,32px);grid-auto-rows:32px;background:#111;padding:4px;border-radius:8px;touch-action:manipulation}
-  .cell{position:relative;width:32px;height:32px;background:#fff}.cell.block{background:#111}
-  .cell input{width:100%;height:100%;border:none;text-transform:uppercase;font:600 16px/1 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;text-align:center;background:transparent;outline:none}
-  .num{position:absolute;top:2px;left:3px;font-size:10px;color:#333}
-  .cell.highlight{outline:2px solid #4b8;z-index:1}
-  .cell.correct{background:#e9fdf3}.cell.wrong{background:#ffe8e6}
-  .clues{flex:1 1 300px;display:flex;gap:16px;flex-wrap:wrap}
-  .clue-list{background:#fff;border-radius:10px;padding:12px;flex:1 1 280px}
-  .clue-list h3{margin:0 0 6px;font-size:16px}.clue{font-size:14px;margin:6px 0}
-  .toolbar{display:flex;gap:8px;flex-wrap:wrap}
-  button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-radius:8px;font-weight:600}
-  .tiny{background:#f0efe9;color:#222;font-weight:600;padding:6px 8px;border:1px solid #ddd}
-  .poem{background:#fff;border-radius:10px;padding:12px;display:none}
-  .footer{text-align:center;font-size:12px;opacity:.7;padding-top:6px}
-  @media (max-width:480px){.grid{grid-template-columns:repeat(15,26px);grid-auto-rows:26px}.cell{width:26px;height:26px}.num{font-size:9px}}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f7f6f3;color:#222}
+header{text-align:center;padding:18px 14px 10px}
+h1{font-size:22px;margin:0 0 4px}.sub{font-size:14px;opacity:.8}
+.wrap{display:flex;flex-direction:column;gap:14px;padding:10px 14px 24px;max-width:900px;margin:0 auto}
+.game{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(15,32px);grid-auto-rows:32px;background:#111;padding:4px;border-radius:8px;touch-action:manipulation}
+.cell{position:relative;width:32px;height:32px;background:#fff}.cell.block{background:#111}
+.cell input{width:100%;height:100%;border:none;text-transform:uppercase;font:600 16px/1 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;text-align:center;background:transparent;outline:none}
+.num{position:absolute;top:2px;left:3px;font-size:10px;color:#333}
+.cell.highlight{outline:2px solid #4b8;z-index:1}.cell.correct{background:#e9fdf3}.cell.wrong{background:#ffe8e6}
+.clues{flex:1 1 300px;display:flex;gap:16px;flex-wrap:wrap}
+.clue-list{background:#fff;border-radius:10px;padding:12px;flex:1 1 280px}
+.clue-list h3{margin:0 0 6px;font-size:16px}.clue{font-size:14px;margin:6px 0}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-radius:8px;font-weight:600}
+.tiny{background:#f0efe9;color:#222;font-weight:600;padding:6px 8px;border:1px solid #ddd}
+.poem{background:#fff;border-radius:10px;padding:12px;display:none}
+.footer{text-align:center;font-size:12px;opacity:.7;padding-top:6px}
+@media (max-width:480px){.grid{grid-template-columns:repeat(15,26px);grid-auto-rows:26px}.cell{width:26px;height:26px}.num{font-size:9px}}
 </style>
-</head><body>
+</head>
+<body>
 <header>
-  <h1>Happy Birthday, Dad — Mini Crossword</h1>
-  <div class="sub">Tap-friendly • custom words from your world</div>
+  <h1>Happy Birthday, Dad 🎉</h1>
+  <div class="sub">A crossword made just for you — built with love, faith, and a little code by Adiya ❤️</div>
 </header>
+
 <div class="wrap">
   <div class="toolbar">
     <button id="checkBtn">Check</button>
@@ -36,59 +40,154 @@
     <button id="poemBtn">Show Birthday Poem</button>
     <span class="tiny">Tip: Tap a clue to highlight its word.</span>
   </div>
+
   <div class="game">
     <div class="grid" id="grid"></div>
     <div class="clues">
       <div class="clue-list"><h3>Across</h3><div id="across"></div></div>
       <div class="clue-list"><h3>Down</h3><div id="down"></div></div>
       <div class="poem" id="poemBox">
-        <h3 style="margin:0 0 6px;">A Small Birthday Poem</h3>
+        <h3 style="margin:0 0 6px;">A Birthday Poem</h3>
         <p style="margin:0;font-size:14px;line-height:1.5">
-          In the quiet hours where pages turn,<br>
-          You taught us where the true lights burn—<br>
-          In God, in faith, in love held tight,<br>
-          In family gathered close each night.<br><br>
-          Eric, Kailea, Adiya too,<br>
-          All learned our courage came from you.<br>
-          With Zeke at heel, with wisdom won,<br>
-          You made the hard roads almost fun.<br><br>
-          You lifted thoughts with Fanon’s flame,<br>
-          Unchained our minds, called fear by name.<br>
-          So here’s our clue, both bold and kind:<br>
-          Your love—our key—unlocks the mind.
+          You taught us where true strength resides,<br>
+          Between the pages where wisdom hides.<br>
+          In God, in faith, in love that stays,<br>
+          You’ve guided us through every maze.<br><br>
+          Eric, Kailea, Adiya too—<br>
+          Each of us shaped by love from you.<br>
+          Zeke keeps watch, Fanon lit your spark,<br>
+          And through the storms, you’ve been our ark.<br><br>
+          So here’s a gift in lines and squares,<br>
+          Of family, words, and answered prayers.
         </p>
       </div>
     </div>
   </div>
-  <div class="footer">Built with love by Adiya • Works offline • No data collected</div>
+  <div class="footer">© 2025 • Coded with ❤️ by Adiya</div>
 </div>
+
 <script>
 const SIZE=15,blocks='#',grid=Array.from({length:SIZE},()=>Array.from({length:SIZE},()=>blocks));
-function placeWord(r,c,w,d){for(let i=0;i<w.length;i++){const rr=d==='A'?r:r+i,cc=d==='A'?c+i:c,ch=w[i];if(grid[rr][cc]!==blocks&&grid[rr][cc]!==ch){console.warn('Conflict',w,rr,cc)}grid[rr][cc]=ch}}
-placeWord(7,2,'COLONIALISM','A');placeWord(7,4,'LOVE','D');placeWord(7,7,'FAITH','D');
-placeWord(8,6,'FAMILY','A');placeWord(8,3,'GOD','A');placeWord(4,2,'ERIC','D');
-placeWord(4,1,'ZEKE','A');placeWord(3,6,'FANON','D');placeWord(9,6,'WIFE','A');
-placeWord(5,9,'KAILEA','A');placeWord(11,9,'ADIYA','A');
-function findStarts(){const s={across:[],down:[]};let n=1;for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]===blocks)continue;const A=(c===0||grid[r][c-1]===blocks)&&(c+1<SIZE&&grid[r][c+1]!==blocks),D=(r===0||grid[r-1][c]===blocks)&&(r+1<SIZE&&grid[r+1][c]!==blocks);if(A)s.across.push({num:n++,r,c,dir:'A'});if(D)s.down.push({num:n++,r,c,dir:'D'})}return s}
-function readEntry(r,c,d){let s='';let rr=r,cc=c;while(rr<SIZE&&cc<SIZE&&grid[rr][cc]!==blocks){s+=grid[rr][cc];if(d==='A')cc++;else rr++}return s}
-const customClue={GOD:'Our shepherd and source of wisdom.',FAMILY:'The crew that always comes first.',LOVE:'Affection that never fails.',FAITH:'Trust that steadies every step.',ERIC:'Firstborn son.',ADIYA:'Last born daughter (the one who made this!).',KAILEA:'Firstborn daughter.',WIFE:'Partner, friend, home.',ZEKE:'Faithful four-legged family member.',FANON:'Frantz — a spark for decolonized thought.',COLONIALISM:'The imprisonment of the mind to be unlearned.'};
-const starts=findStarts(),gridEl=document.getElementById('grid');const cells=[];
-for(let r=0;r<SIZE;r++){cells[r]=[];for(let c=0;c<SIZE;c++){const d=document.createElement('div');d.className='cell'+(grid[r][c]===blocks?' block':'');if(grid[r][c]!==blocks){const i=document.createElement('input');i.maxLength=1;i.autocomplete='off';i.inputMode='latin';i.dataset.r=r;i.dataset.c=c;d.appendChild(i);cells[r][c]=i}gridEl.appendChild(d)}}
-function labelStarts(){starts.across.forEach(s=>{const idx=s.r*SIZE+s.c,l=document.createElement('div');l.className='num';l.textContent=s.num;gridEl.children[idx].appendChild(l)});starts.down.forEach(s=>{const idx=s.r*SIZE+s.c,l=document.createElement('div');l.className='num';l.textContent=s.num;gridEl.children[idx].appendChild(l)})}
+function placeWord(r,c,w,d){for(let i=0;i<w.length;i++){const rr=d==='A'?r:r+i,cc=d==='A'?c+i:c;grid[rr][cc]=w[i];}}
+placeWord(7,2,'COLONIALISM','A');
+placeWord(7,4,'LOVE','D');
+placeWord(7,7,'FAITH','D');
+placeWord(8,6,'FAMILY','A');
+placeWord(8,3,'GOD','A');
+placeWord(4,2,'ERIC','D');
+placeWord(4,1,'ZEKE','A');
+placeWord(3,6,'FANON','D');
+placeWord(9,6,'WIFE','A');
+placeWord(5,9,'KAILEA','A');
+placeWord(11,9,'ADIYA','A');
+
+const customClue={
+  GOD:"The constant in every plot twist.",
+  FAMILY:"The original team—you built the dynasty.",
+  LOVE:"Your secret superpower. (And Mom’s too.)",
+  FAITH:"The compass you always trusted.",
+  ERIC:"The first to carry the torch (and probably your tools).",
+  ADIYA:"The finale who coded this crossword. 😉",
+  KAILEA:"The trendsetter with your same heart.",
+  WIFE:"Your partner-in-grace—and in keeping everyone fed.",
+  ZEKE:"The guardian who still thinks he’s human.",
+  FANON:"The writer who taught you to think dangerously.",
+  COLONIALISM:"The system you unlearn, one book at a time."
+};
+
+function findStarts(){const s={across:[],down:[]};let n=1;
+for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+if(grid[r][c]===blocks)continue;
+const A=(c===0||grid[r][c-1]===blocks)&&(c+1<SIZE&&grid[r][c+1]!==blocks);
+const D=(r===0||grid[r-1][c]===blocks)&&(r+1<SIZE&&grid[r+1][c]!==blocks);
+if(A)s.across.push({num:n++,r,c,dir:'A'});
+if(D)s.down.push({num:n++,r,c,dir:'D'});}
+return s;}
+
+function readEntry(r,c,d){let s='';while(r<SIZE&&c<SIZE&&grid[r][c]!==blocks){s+=grid[r][c];if(d==='A')c++;else r++;}return s;}
+
+const startsRaw=findStarts();
+const starts={
+  across:startsRaw.across.filter(s=>!!customClue[readEntry(s.r,s.c,'A')]),
+  down:startsRaw.down.filter(s=>!!customClue[readEntry(s.r,s.c,'D')])
+};
+
+const gridEl=document.getElementById('grid');const cells=[];
+for(let r=0;r<SIZE;r++){cells[r]=[];
+for(let c=0;c<SIZE;c++){const d=document.createElement('div');
+d.className='cell'+(grid[r][c]===blocks?' block':'');
+if(grid[r][c]!==blocks){const i=document.createElement('input');
+i.maxLength=1;i.autocomplete='off';i.inputMode='latin';
+i.dataset.r=r;i.dataset.c=c;d.appendChild(i);cells[r][c]=i;}
+gridEl.appendChild(d);}}
+
+function labelStarts(){
+const add=(arr)=>arr.forEach(s=>{
+const idx=s.r*SIZE+s.c;const num=document.createElement('div');
+num.className='num';num.textContent=s.num;gridEl.children[idx].appendChild(num);});
+add(starts.across);add(starts.down);}
 labelStarts();
-function addClues(id,list){const host=document.getElementById(id);list.forEach(s=>{const w=readEntry(s.r,s.c,s.dir),cl=customClue[w]||('Fill: '+w.length+' letters');const a=document.createElement('div');a.className='clue';a.innerHTML=`<strong>${s.num}</strong>. ${cl} <span style="opacity:.5">(${w.length})</span>`;a.addEventListener('click',()=>{highlightEntry(s.r,s.c,s.dir);const inp=cells[s.r][s.c];if(inp){inp.focus();inp.select()}});host.appendChild(a)})}
-addClues('across',starts.across.map(s=>({...s,dir:'A'})));addClues('down',starts.down.map(s=>({...s,dir:'D'})));
-function allCellsFor(r,c,d){const L=[];let rr=r,cc=c;while(rr<SIZE&&cc<SIZE&&grid[rr][cc]!==blocks){L.push({r:rr,c:cc});if(d==='A')cc++;else rr++}return L}
-function highlightEntry(r,c,d){Array.from(document.querySelectorAll('.cell')).forEach(el=>el.classList.remove('highlight'));allCellsFor(r,c,d).forEach(({r,c})=>{const idx=r*SIZE+c;gridEl.children[idx].classList.add('highlight')})}
-gridEl.addEventListener('input',e=>{if(e.target.tagName!=='INPUT')return;e.target.value=e.target.value.toUpperCase().replace(/[^A-Z]/g,'');const r=+e.target.dataset.r,c=+e.target.dataset.c;let nc=c+1;while(nc<SIZE&&(!cells[r][nc]))nc++;if(nc<SIZE&&cells[r][nc])cells[r][nc].focus()});
-gridEl.addEventListener('keydown',e=>{if(e.target.tagName!=='INPUT')return;const r=+e.target.dataset.r,c=+e.target.dataset.c;if(e.key==='Backspace'&&!e.target.value){let pc=c-1;while(pc>=0&&(!cells[r][pc]))pc--;if(pc>=0&&cells[r][pc]){cells[r][pc].focus();e.preventDefault()}}});
-function checkAll(){Array.from(document.querySelectorAll('.cell')).forEach(el=>el.classList.remove('correct','wrong'));let correct=0,total=0;for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]===blocks)continue;total++;const val=(cells[r][c]?.value||'').toUpperCase(),good=grid[r][c].toUpperCase();const cellDiv=gridEl.children[r*SIZE+c];if(!val)continue;if(val===good){cellDiv.classList.add('correct');correct++}else{cellDiv.classList.add('wrong')}}if(correct===total){alert('Perfect! You solved it!');document.getElementById('poemBox').style.display='block'}}
-function revealOne(){for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]===blocks)continue;const t=cells[r][c];if(t&&(!t.value||t.value.toUpperCase()!==grid[r][c])){t.value=grid[r][c];return}}}
-function clearAll(){Array.from(document.querySelectorAll('.cell')).forEach(el=>el.classList.remove('correct','wrong','highlight'));for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(cells[r][c])cells[r][c].value=''}
+
+function addClues(id,list){
+const host=document.getElementById(id);
+list.forEach(s=>{
+const w=readEntry(s.r,s.c,s.dir);
+const clueText=customClue[w];
+const a=document.createElement('div');
+a.className='clue';
+a.innerHTML=`<strong>${s.num}</strong>. ${clueText} <span style="opacity:.5">(${w.length})</span>`;
+a.addEventListener('click',()=>{
+highlightEntry(s.r,s.c,s.dir);
+const inp=cells[s.r][s.c];if(inp){inp.focus();inp.select();}});
+host.appendChild(a);});}
+addClues('across',starts.across);addClues('down',starts.down);
+
+function allCellsFor(r,c,d){const L=[];while(r<SIZE&&c<SIZE&&grid[r][c]!==blocks){L.push({r,c});if(d==='A')c++;else r++;}return L;}
+function highlightEntry(r,c,d){
+document.querySelectorAll('.cell').forEach(el=>el.classList.remove('highlight'));
+allCellsFor(r,c,d).forEach(({r,c})=>{
+const idx=r*SIZE+c;gridEl.children[idx].classList.add('highlight');});}
+
+gridEl.addEventListener('input',e=>{
+if(e.target.tagName!=='INPUT')return;
+e.target.value=e.target.value.toUpperCase().replace(/[^A-Z]/g,'');
+const r=+e.target.dataset.r,c=+e.target.dataset.c;let nc=c+1;
+while(nc<SIZE&&!cells[r][nc])nc++;if(nc<SIZE&&cells[r][nc])cells[r][nc].focus();});
+
+gridEl.addEventListener('keydown',e=>{
+if(e.target.tagName!=='INPUT')return;
+const r=+e.target.dataset.r,c=+e.target.dataset.c;
+if(e.key==='Backspace'&&!e.target.value){let pc=c-1;
+while(pc>=0&&!cells[r][pc])pc--;if(pc>=0&&cells[r][pc]){cells[r][pc].focus();e.preventDefault();}}});
+
+function checkAll(){
+document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong'));
+let correct=0,total=0;
+for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]===blocks)continue;total++;}
+for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+if(grid[r][c]===blocks)continue;
+const val=(cells[r][c]?.value||'').toUpperCase();
+const good=grid[r][c].toUpperCase();
+const cellDiv=gridEl.children[r*SIZE+c];
+if(!val)continue;if(val===good){cellDiv.classList.add('correct');correct++;}
+else cellDiv.classList.add('wrong');}
+if(correct===total){alert('Perfect! You solved it!');document.getElementById('poemBox').style.display='block';}}
+
+function revealOne(){
+for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+if(grid[r][c]===blocks)continue;
+const t=cells[r][c];
+if(t&&(!t.value||t.value.toUpperCase()!==grid[r][c])){t.value=grid[r][c];return;}}}
+
+function clearAll(){
+document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong','highlight'));
+for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(cells[r][c])cells[r][c].value='';}
+
 document.getElementById('checkBtn').addEventListener('click',checkAll);
 document.getElementById('revealBtn').addEventListener('click',revealOne);
 document.getElementById('clearBtn').addEventListener('click',clearAll);
-document.getElementById('poemBtn').addEventListener('click',()=>{const b=document.getElementById('poemBox');b.style.display=b.style.display==='block'?'none':'block'});
+document.getElementById('poemBtn').addEventListener('click',()=>{const b=document.getElementById('poemBox');b.style.display=b.style.display==='block'?'none':'block';});
 const s=starts.across[0];if(s)highlightEntry(s.r,s.c,'A');
 </script>
-</body></html>
+</body>
+</html>
