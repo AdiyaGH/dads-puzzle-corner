@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Happy Birthday, Dad — Crossword from Adiya</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday, Dad — Crossword</title>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f7f6f3;color:#222}
 header{text-align:center;padding:18px 14px 10px}
@@ -29,7 +28,7 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
 <body>
 <header>
   <h1>Happy Birthday, Dad 🎉</h1>
-  <div class="sub">A crossword made just for you — built with love, faith, and a little code by Adiya ❤️</div>
+  <div class="sub">A family crossword built by Adiya</div>
 </header>
 
 <div class="wrap">
@@ -37,8 +36,8 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
     <button id="checkBtn">Check</button>
     <button id="revealBtn">Reveal One</button>
     <button id="clearBtn">Clear</button>
-    <button id="poemBtn">Show Birthday Poem</button>
-    <span class="tiny">Tip: Tap a clue to highlight its word.</span>
+    <button id="poemBtn">Show Poem</button>
+    <span class="tiny">Tip: tap a clue to highlight its word.</span>
   </div>
 
   <div class="game">
@@ -47,147 +46,158 @@ button,.tiny{border:none;background:#222;color:#fff;padding:10px 12px;border-rad
       <div class="clue-list"><h3>Across</h3><div id="across"></div></div>
       <div class="clue-list"><h3>Down</h3><div id="down"></div></div>
       <div class="poem" id="poemBox">
-        <h3 style="margin:0 0 6px;">A Birthday Poem</h3>
+        <h3 style="margin:0 0 6px;">A Small Birthday Poem</h3>
         <p style="margin:0;font-size:14px;line-height:1.5">
-          You taught us where true strength resides,<br>
-          Between the pages where wisdom hides.<br>
-          In God, in faith, in love that stays,<br>
-          You’ve guided us through every maze.<br><br>
-          Eric, Kailea, Adiya too—<br>
-          Each of us shaped by love from you.<br>
-          Zeke keeps watch, Fanon lit your spark,<br>
-          And through the storms, you’ve been our ark.<br><br>
-          So here’s a gift in lines and squares,<br>
-          Of family, words, and answered prayers.
+          Pages turned, we learned from you—<br>
+          to love, to think, to see things through.<br>
+          God and family, faith held fast;<br>
+          your steady care has always last.<br><br>
+          Eric, Kailea, Adiya—home;<br>
+          with Zeke on watch, we’re not alone.<br>
+          Fanon’s fire, decolonized mind—<br>
+          your gift: a clearer world to find.
         </p>
       </div>
     </div>
   </div>
-  <div class="footer">© 2025 • Coded with ❤️ by Adiya</div>
+  <div class="footer">© 2025 • With love, Adiya</div>
 </div>
 
 <script>
+/* --- grid + words --- */
 const SIZE=15,blocks='#',grid=Array.from({length:SIZE},()=>Array.from({length:SIZE},()=>blocks));
 function placeWord(r,c,w,d){for(let i=0;i<w.length;i++){const rr=d==='A'?r:r+i,cc=d==='A'?c+i:c;grid[rr][cc]=w[i];}}
-placeWord(7,2,'COLONIALISM','A');
-placeWord(7,4,'LOVE','D');
-placeWord(7,7,'FAITH','D');
-placeWord(8,6,'FAMILY','A');
-placeWord(8,3,'GOD','A');
-placeWord(4,2,'ERIC','D');
-placeWord(4,1,'ZEKE','A');
-placeWord(3,6,'FANON','D');
-placeWord(9,6,'WIFE','A');
-placeWord(5,9,'KAILEA','A');
-placeWord(11,9,'ADIYA','A');
+/* Layout uses only your intended entries */
+placeWord(7,2,'COLONIALISM','A');  // across
+placeWord(7,4,'LOVE','D');         // down
+placeWord(7,7,'FAITH','D');        // down
+placeWord(8,6,'FAMILY','A');       // across
+placeWord(8,3,'GOD','A');          // across
+placeWord(4,2,'ERIC','D');         // down
+placeWord(4,1,'ZEKE','A');         // across
+placeWord(3,6,'FANON','D');        // down
+placeWord(9,6,'WIFE','A');         // across
+placeWord(5,9,'KAILEA','A');       // across
+placeWord(11,9,'ADIYA','A');       // across
 
+/* --- specific, concrete clues --- */
 const customClue={
-  GOD:"The constant in every plot twist.",
-  FAMILY:"The original team—you built the dynasty.",
-  LOVE:"Your secret superpower. (And Mom’s too.)",
-  FAITH:"The compass you always trusted.",
-  ERIC:"The first to carry the torch (and probably your tools).",
-  ADIYA:"The finale who coded this crossword. 😉",
-  KAILEA:"The trendsetter with your same heart.",
-  WIFE:"Your partner-in-grace—and in keeping everyone fed.",
-  ZEKE:"The guardian who still thinks he’s human.",
-  FANON:"The writer who taught you to think dangerously.",
-  COLONIALISM:"The system you unlearn, one book at a time."
+  GOD:"Genesis 1:1 subject (3).",
+  FAMILY:"Unit that comes before work in your house (6).",
+  LOVE:"1 Corinthians 13 says this 'never fails' (4).",
+  FAITH:"Hebrews 11:1 calls it 'assurance of things hoped for' (5).",
+  ERIC:"First-born son’s name (4).",
+  ADIYA:"Last-born daughter who built this puzzle (5).",
+  KAILEA:"First-born daughter’s name (6).",
+  WIFE:"Mom’s title in marriage (4).",
+  ZEKE:"Our dog’s name (4).",
+  FANON:"Frantz, author of 'Black Skin, White Masks' (5).",
+  COLONIALISM:"System critiqued by Fanon; 'imprisonment of the mind' (11)."
 };
 
+/* --- numbering + filtering to only intended words --- */
 function findStarts(){const s={across:[],down:[]};let n=1;
 for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
-if(grid[r][c]===blocks)continue;
-const A=(c===0||grid[r][c-1]===blocks)&&(c+1<SIZE&&grid[r][c+1]!==blocks);
-const D=(r===0||grid[r-1][c]===blocks)&&(r+1<SIZE&&grid[r+1][c]!==blocks);
-if(A)s.across.push({num:n++,r,c,dir:'A'});
-if(D)s.down.push({num:n++,r,c,dir:'D'});}
+  if(grid[r][c]===blocks)continue;
+  const A=(c===0||grid[r][c-1]===blocks)&&(c+1<SIZE&&grid[r][c+1]!==blocks);
+  const D=(r===0||grid[r-1][c]===blocks)&&(r+1<SIZE&&grid[r+1][c]!==blocks);
+  if(A)s.across.push({num:n++,r,c,dir:'A'});
+  if(D)s.down.push({num:n++,r,c,dir:'D'});
+}
 return s;}
-
 function readEntry(r,c,d){let s='';while(r<SIZE&&c<SIZE&&grid[r][c]!==blocks){s+=grid[r][c];if(d==='A')c++;else r++;}return s;}
-
 const startsRaw=findStarts();
 const starts={
   across:startsRaw.across.filter(s=>!!customClue[readEntry(s.r,s.c,'A')]),
   down:startsRaw.down.filter(s=>!!customClue[readEntry(s.r,s.c,'D')])
 };
 
+/* --- render grid --- */
 const gridEl=document.getElementById('grid');const cells=[];
 for(let r=0;r<SIZE;r++){cells[r]=[];
-for(let c=0;c<SIZE;c++){const d=document.createElement('div');
-d.className='cell'+(grid[r][c]===blocks?' block':'');
-if(grid[r][c]!==blocks){const i=document.createElement('input');
-i.maxLength=1;i.autocomplete='off';i.inputMode='latin';
-i.dataset.r=r;i.dataset.c=c;d.appendChild(i);cells[r][c]=i;}
-gridEl.appendChild(d);}}
+  for(let c=0;c<SIZE;c++){
+    const d=document.createElement('div');
+    d.className='cell'+(grid[r][c]===blocks?' block':'');
+    if(grid[r][c]!==blocks){
+      const i=document.createElement('input');i.maxLength=1;i.autocomplete='off';i.inputMode='latin';
+      i.dataset.r=r;i.dataset.c=c;d.appendChild(i);cells[r][c]=i;
+    }
+    gridEl.appendChild(d);
+  }
+}
 
+/* --- labels --- */
 function labelStarts(){
-const add=(arr)=>arr.forEach(s=>{
-const idx=s.r*SIZE+s.c;const num=document.createElement('div');
-num.className='num';num.textContent=s.num;gridEl.children[idx].appendChild(num);});
-add(starts.across);add(starts.down);}
+  const add=arr=>arr.forEach(s=>{
+    const idx=s.r*SIZE+s.c,lab=document.createElement('div');
+    lab.className='num';lab.textContent=s.num;gridEl.children[idx].appendChild(lab);
+  });
+  add(starts.across);add(starts.down);
+}
 labelStarts();
 
+/* --- clues --- */
 function addClues(id,list){
-const host=document.getElementById(id);
-list.forEach(s=>{
-const w=readEntry(s.r,s.c,s.dir);
-const clueText=customClue[w];
-const a=document.createElement('div');
-a.className='clue';
-a.innerHTML=`<strong>${s.num}</strong>. ${clueText} <span style="opacity:.5">(${w.length})</span>`;
-a.addEventListener('click',()=>{
-highlightEntry(s.r,s.c,s.dir);
-const inp=cells[s.r][s.c];if(inp){inp.focus();inp.select();}});
-host.appendChild(a);});}
+  const host=document.getElementById(id);
+  list.forEach(s=>{
+    const w=readEntry(s.r,s.c,s.dir);
+    const a=document.createElement('div');
+    a.className='clue';
+    a.innerHTML=`<strong>${s.num}</strong>. ${customClue[w]}`;
+    a.addEventListener('click',()=>{highlightEntry(s.r,s.c,s.dir);const inp=cells[s.r][s.c];if(inp){inp.focus();inp.select();}});
+    host.appendChild(a);
+  });
+}
 addClues('across',starts.across);addClues('down',starts.down);
 
+/* --- highlight & typing --- */
 function allCellsFor(r,c,d){const L=[];while(r<SIZE&&c<SIZE&&grid[r][c]!==blocks){L.push({r,c});if(d==='A')c++;else r++;}return L;}
 function highlightEntry(r,c,d){
-document.querySelectorAll('.cell').forEach(el=>el.classList.remove('highlight'));
-allCellsFor(r,c,d).forEach(({r,c})=>{
-const idx=r*SIZE+c;gridEl.children[idx].classList.add('highlight');});}
-
+  document.querySelectorAll('.cell').forEach(el=>el.classList.remove('highlight'));
+  allCellsFor(r,c,d).forEach(({r,c})=>{gridEl.children[r*SIZE+c].classList.add('highlight');});
+}
 gridEl.addEventListener('input',e=>{
-if(e.target.tagName!=='INPUT')return;
-e.target.value=e.target.value.toUpperCase().replace(/[^A-Z]/g,'');
-const r=+e.target.dataset.r,c=+e.target.dataset.c;let nc=c+1;
-while(nc<SIZE&&!cells[r][nc])nc++;if(nc<SIZE&&cells[r][nc])cells[r][nc].focus();});
-
+  if(e.target.tagName!=='INPUT')return;
+  e.target.value=e.target.value.toUpperCase().replace(/[^A-Z]/g,'');
+  const r=+e.target.dataset.r,c=+e.target.dataset.c;let nc=c+1;
+  while(nc<SIZE&&!cells[r][nc])nc++;if(nc<SIZE&&cells[r][nc])cells[r][nc].focus();
+});
 gridEl.addEventListener('keydown',e=>{
-if(e.target.tagName!=='INPUT')return;
-const r=+e.target.dataset.r,c=+e.target.dataset.c;
-if(e.key==='Backspace'&&!e.target.value){let pc=c-1;
-while(pc>=0&&!cells[r][pc])pc--;if(pc>=0&&cells[r][pc]){cells[r][pc].focus();e.preventDefault();}}});
+  if(e.target.tagName!=='INPUT')return;
+  const r=+e.target.dataset.r,c=+e.target.dataset.c;
+  if(e.key==='Backspace'&&!e.target.value){let pc=c-1;while(pc>=0&&!cells[r][pc])pc--;if(pc>=0&&cells[r][pc]){cells[r][pc].focus();e.preventDefault();}}
+});
 
+/* --- buttons --- */
 function checkAll(){
-document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong'));
-let correct=0,total=0;
-for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]===blocks)continue;total++;}
-for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
-if(grid[r][c]===blocks)continue;
-const val=(cells[r][c]?.value||'').toUpperCase();
-const good=grid[r][c].toUpperCase();
-const cellDiv=gridEl.children[r*SIZE+c];
-if(!val)continue;if(val===good){cellDiv.classList.add('correct');correct++;}
-else cellDiv.classList.add('wrong');}
-if(correct===total){alert('Perfect! You solved it!');document.getElementById('poemBox').style.display='block';}}
-
+  document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong'));
+  let correct=0,total=0;
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){if(grid[r][c]!==blocks)total++;}
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+    if(grid[r][c]===blocks)continue;
+    const val=(cells[r][c]?.value||'').toUpperCase(),good=grid[r][c].toUpperCase();
+    const cellDiv=gridEl.children[r*SIZE+c];
+    if(!val)continue;
+    if(val===good){cellDiv.classList.add('correct');correct++;} else {cellDiv.classList.add('wrong');}
+  }
+  if(correct===total){alert('Perfect! You solved it!');document.getElementById('poemBox').style.display='block';}
+}
 function revealOne(){
-for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
-if(grid[r][c]===blocks)continue;
-const t=cells[r][c];
-if(t&&(!t.value||t.value.toUpperCase()!==grid[r][c])){t.value=grid[r][c];return;}}}
-
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+    if(grid[r][c]===blocks)continue;
+    const t=cells[r][c];
+    if(t&&(!t.value||t.value.toUpperCase()!==grid[r][c])){t.value=grid[r][c];return;}
+  }
+}
 function clearAll(){
-document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong','highlight'));
-for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(cells[r][c])cells[r][c].value='';}
-
+  document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong','highlight'));
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(cells[r][c])cells[r][c].value='';
+}
 document.getElementById('checkBtn').addEventListener('click',checkAll);
 document.getElementById('revealBtn').addEventListener('click',revealOne);
 document.getElementById('clearBtn').addEventListener('click',clearAll);
 document.getElementById('poemBtn').addEventListener('click',()=>{const b=document.getElementById('poemBox');b.style.display=b.style.display==='block'?'none':'block';});
-const s=starts.across[0];if(s)highlightEntry(s.r,s.c,'A');
+const s=(starts.across[0]||starts.down[0]);if(s)highlightEntry(s.r,s.c,s.dir);
 </script>
 </body>
 </html>
